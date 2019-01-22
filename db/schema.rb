@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_223911) do
+ActiveRecord::Schema.define(version: 2019_01_22_193523) do
+
+  create_table "rollovers", force: :cascade do |t|
+    t.string "rollover_id"
+    t.string "rollover_type"
+    t.string "origin_bank"
+    t.string "destination_bank"
+    t.string "integer"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
