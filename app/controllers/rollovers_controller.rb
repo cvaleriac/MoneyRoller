@@ -1,0 +1,4 @@
+class RolloversController < ApplicationController
+
+
+end
