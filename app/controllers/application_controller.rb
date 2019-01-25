@@ -3,19 +3,16 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
+    set :views, "app/views"
     enable :sessions
     set :session_secret, "moneyroller"
   end
 
-
-  get '/' do
-    #"Welcome to MoneyRoller!"
+  get "/" do
     erb :index
   end
 
-  get '/signup' do
+  get "/signup" do
     erb :signup
   end
 
@@ -32,6 +29,12 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/account' do
+    @user = User.find(session[:user_id])
+    erb :account
+  end
+
+
   get "/login" do
     erb :login
   end
@@ -47,11 +50,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/account' do
-    @user = User.find(session[:user_id])
-    erb :account
+  get "/success" do
+    if logged_in?
+      erb :success
+    else
+      redirect "/login"
+    end
   end
-
 
   get "/failure" do
     erb :failure
@@ -60,6 +65,16 @@ class ApplicationController < Sinatra::Base
   get "/logout" do
     session.clear
     redirect "/"
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
   end
 
 end
