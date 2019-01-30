@@ -27,7 +27,7 @@ post '/login' do
       session["user_id"] = user.id
       redirect to "/user_rollovers"
     else
-      redirect to "/login"
+      redirect to "/failure"
     end
   end
 
