@@ -1,0 +1,10 @@
+<h1>Your Rollovers</h1>
+
+<% @rollovers.each do |rollover| %>
+  <a href='/rollovers/<%=rollover.id%>'>
+    <h2>Name: <%= rollover.type %></h2>
+  </a>
+  <br>
+<%end %>
+<a class="button" href="/rollovers">Rollovers</a>
+<a class="button" href="/">Home</a>

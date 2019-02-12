@@ -1,7 +1,12 @@
 <h1>Hello <%= @user.username %>, here is the list of your rollovers:</h1>
 
-
+<% @user.rollovers.each do |rollover| %>
+  <ul>
+    <li><a href="/rollovers/<%=rollover.type%>"><%= rollover.type %></a></li>
+  </ul>
+<% end %>
 
 
 
   <p><a href="/logout">Log Out</a></p>
+  <p><a href="/">Home</a></p>
