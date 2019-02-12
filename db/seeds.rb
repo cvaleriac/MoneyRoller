@@ -6,3 +6,4 @@ rolloverhash = {amount: "1000", rollover_type: "incoming", user_id: valeria.id}
 Rollover.create(rolloverhash)
 rollover2 = Rollover.create(amount: "100", rollover_type: "outgoing")
 valeria.rollovers << rollover2
+rollover3 = Rollover.create(amount: "500", rollover_type: "incoming", valeria.id)

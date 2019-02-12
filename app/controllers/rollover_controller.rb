@@ -4,4 +4,6 @@ class RolloversController < ApplicationController
       @rollovers = Rollover.all
       erb :'rollovers/index'
     end
+
+
 end
