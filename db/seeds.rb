@@ -9,4 +9,5 @@ rollover2 = Rollover.create(amount: "100", rollover_type: "outgoing", origin_ban
 valeria.rollovers << rollover2
 rollover3 = Rollover.create(amount: "1000", rollover_type: "incoming", origin_bank: "Alma Bank", destination_bank: "Bank of America")
 jack.rollovers << rollover3
+valeria.rollovers << rollover3
 brisa.rollovers << rollover2
