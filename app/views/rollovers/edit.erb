@@ -1,0 +1,8 @@
+<h3>Edit rollover</h3>
+<form action="/rollovers" method="post">
+  <input type="text" name="rollover[rollover_type]" value="<%= @rollover.rollover_type %>">
+  <input type="text" name="rollover[origin_bank]" value="<%= @rollover.origin_bank %>">
+  <input type="text" name="rollover[destination_bank]" value="<%= @rollover.destination_bank %>">
+  <input type="text" name="rollover[amount]" value="<%= @rollover.amount %>">
+  <input type="submit" name="" value="Update Rollover">
+</form>

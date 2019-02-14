@@ -13,7 +13,7 @@ class RolloversController < ApplicationController
     end
 
 
-    get "/rollover/:id" do
+    get "/rollovers/:id" do
     @rollover = Rollover.find(params[:id])
     erb :'/rollovers/show'
     end
@@ -23,5 +23,9 @@ class RolloversController < ApplicationController
       erb :'/rollovers/index'
     end
 
+    get "/rollovers/:id/edit" do
+      @rollover = Rollover.find(params[:id])
+      erb :'/rollovers/edit'
+    end
 
 end
