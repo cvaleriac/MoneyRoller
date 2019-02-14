@@ -28,4 +28,10 @@ class RolloversController < ApplicationController
       erb :'/rollovers/edit'
     end
 
+    patch "/rollovers/:id" do
+      @rollover = Rollover.find(params[:id])
+      @rollover.update(params[:rollover])
+      redirect "/rollovers/#{@rollover.id}"
+    end
+
 end
