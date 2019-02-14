@@ -6,7 +6,8 @@ class RolloversController < ApplicationController
     end
 
     post "/rollovers" do
-      @rollover = Rollover.create(params[:rollover])
+      @rollover = Rollover.new(params[:rollover])
+      @rollover.save
       redirect "/rollovers/#{@rollover.id}"
     end
 
