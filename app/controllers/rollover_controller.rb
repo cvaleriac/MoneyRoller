@@ -34,4 +34,10 @@ class RolloversController < ApplicationController
       redirect "/rollovers/#{@rollover.id}"
     end
 
+    delete "/rollovers/:id" do
+      @rollover = Rollover.find(params[:id])
+      @rollover.destroy
+      redirect "/rollovers"
+    end
+
 end
