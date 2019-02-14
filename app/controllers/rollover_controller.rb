@@ -1,12 +1,13 @@
 class RolloversController < ApplicationController
 
 
-    get "/rollover/new" do
+    get "/rollovers/new" do
     erb :'/rollovers/new'
     end
 
     post "/rollovers" do
-
+      @rollover = Rollover.create(params[:rollover])
+      redirect "/rollovers/#{@rollover.id}"
     end
 
 
