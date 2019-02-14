@@ -4,11 +4,11 @@
 <p>Origin bank:<%= @rollover.origin_bank %></p>
 <p>Destination bank:<%= @rollover.destination_bank %></p>
 
-<a href="/rollovers/<%= @rollover.id %>/edit">Edit rollover</a>
+<p><a href="/rollovers/<%= @rollover.id %>/edit">Edit rollover</a><p>
 
 <form action="/rollovers/<%= @rollover.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" name="submit" value="Delete this rollover">
 </form>
 
-<a class="button" href="/rollovers">Rollovers</a>
+<p><a class="button" href="/rollovers">Rollovers</a><p>
