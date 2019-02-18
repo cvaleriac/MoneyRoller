@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h3>Create a new rollover</h3>
 <form action="/rollovers" method="post">
   <input type="text" name="rollover[rollover_type]" placeholder= "rollover_type" value="">

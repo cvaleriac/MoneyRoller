@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h4> Your rollover data: </h4>
 
 <p>Amount:<%= @rollover.amount %></p>

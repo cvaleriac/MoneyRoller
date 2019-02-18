@@ -1,4 +1,8 @@
+require 'rack-flash'
+
 class RolloversController < ApplicationController
+  use Rack::Flash
+
 
 
     get "/rollovers/new" do
@@ -8,7 +12,7 @@ class RolloversController < ApplicationController
     post "/rollovers" do
       @rollover = Rollover.new(params[:rollover])
       @rollover.save
-
+      flash[:message] = "Successfully created Rollover."
       redirect "/rollovers/#{@rollover.id}"
     end
 
@@ -31,6 +35,7 @@ class RolloversController < ApplicationController
     patch "/rollovers/:id" do
       @rollover = Rollover.find(params[:id])
       @rollover.update(params[:rollover])
+        flash[:message] = "Successfully edited Rollover."
       redirect "/rollovers/#{@rollover.id}"
     end
 
