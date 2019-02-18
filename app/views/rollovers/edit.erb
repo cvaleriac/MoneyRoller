@@ -1,3 +1,5 @@
+<a class="button" href="/rollovers">Rollovers List</a> <a href="/logout">Log Out</a>
+
 <h3>Edit Rollover</h3>
 <form action="/rollovers/<%= @rollover.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
@@ -7,6 +9,3 @@
   <input type="text" name="rollover[amount]" value="<%= @rollover.amount %>">
   <input type="submit" name="" value="Update Rollover">
 </form>
-
-<p><a class="button" href="/rollovers">Rollovers List</a><p>
-<p><a href="/logout">Log Out</a>
