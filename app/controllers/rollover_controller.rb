@@ -40,10 +40,11 @@ class RolloversController < ApplicationController
 
     post "/rollovers" do
       @rollover = Rollover.new(params[:rollover])
+      @rollover = current_user.rollover.build(params[:rollover])
       if valid_params? && @rollover.save
         redirect "/rollovers/#{@rollover.id}"
       else
-        redirect "/rollovers/new"
+        erb :"/rollovers/new"
       end
     end
 
