@@ -3,29 +3,18 @@ require 'rack-flash'
 class RolloversController < ApplicationController
   use Rack::Flash
 
+  get "/rollovers" do
+    @rollovers = Rollover.all
+    erb :'/rollovers/index'
+  end
+
     get "/rollovers/new" do
     erb :'/rollovers/new'
     end
 
-    post "/rollovers" do
-      @rollover = Rollover.new(params[:rollover])
-      if valid_params? && @rollover.save
-      flash[:message] = "Successfully created Rollover."
-      redirect "/rollovers/#{@rollover.id}"
-    else
-      erb "/rollovers/new"
-    end
-  end
-
-
     get "/rollovers/:id" do
-    @rollover = Rollover.find(params[:id])
+    @rollover = Rollover.find_by(id: params[:id])
     erb :'/rollovers/show'
-    end
-
-    get "/rollovers" do
-      @rollovers = Rollover.all
-      erb :'/rollovers/index'
     end
 
     get "/rollovers/:id/edit" do
@@ -39,8 +28,7 @@ class RolloversController < ApplicationController
   end
 
     post "/rollovers" do
-      @rollover = Rollover.new(params[:rollover])
-      @rollover = current_user.rollover.build(params[:rollover])
+      @rollover = current_user.rollovers.build(params[:rollover])
       if valid_params? && @rollover.save
         redirect "/rollovers/#{@rollover.id}"
       else
