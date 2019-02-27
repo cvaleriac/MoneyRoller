@@ -10,8 +10,11 @@
 <p>Origin bank: <%= @rollover.origin_bank %></p>
 <p>Destination bank: <%= @rollover.destination_bank %></p>
 
+<% if @rollover.user == current_user %>
 
 <form action="/rollovers/<%= @rollover.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" name="submit" value="Delete this rollover">
 </form>
+
+<% end %>

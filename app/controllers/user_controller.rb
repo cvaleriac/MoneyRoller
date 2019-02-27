@@ -19,17 +19,22 @@ post "/signup" do
 end
 
 get "/login" do
+  if is_logged_in?
+    redirect "/rollovers"
+  else
   erb :'/users/login'
+  end
 end
 
 post '/login' do
   user = User.find_by(:username => params[:username])
 
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
       redirect to "/show"
     else
-      redirect to "/failure"
+      flash[:message] = "Login failed. Please try again!"
+      erb :'users/login'
     end
   end
 
@@ -38,13 +43,14 @@ get '/show' do
   erb :'/users/show'
 end
 
-get "/failure" do
-  erb :'/users/failure'
-end
-
 get "/logout" do
   session.clear
   redirect "/"
+end
+
+get "/users/:id" do
+  @user = User.find_by(id: params[:id])
+  erb :"/users/show"
 end
 
 end
