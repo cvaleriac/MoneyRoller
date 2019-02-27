@@ -4,21 +4,28 @@ class UserController < ApplicationController
   use Rack::Flash
 
   get "/signup" do
+    if is_logged_in?
+      redirect '/show'
+    else
   erb :'/users/new'
+end
 end
 
 post "/signup" do
-  if params[:username].empty?
-    params[:password].empty?
-    redirect to '/failure'
-  end
+  if !User.find_by(:username => params[:username]).nil?
+    flash[:message] = "This username is already taken. Please choose another!"
+    erb :"users/new"
+  else
 
-  user = User.new(:username => params[:username], :password => params[:password])
-  if user.save
+  @user = User.new(:username => params[:username], :password => params[:password])
+  if !params[:username].empty? && @user.save
+    session[:user_id] = @user.id
     redirect '/login'
   else
-    redirect '/failure'
+    flash[:message] = "There was an error. Please try again"
+    erb :"users/new"
   end
+end
 end
 
 get "/login" do
