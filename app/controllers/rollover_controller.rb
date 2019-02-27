@@ -32,7 +32,7 @@ class RolloversController < ApplicationController
 
     get "/rollovers/:id/edit" do
         @rollover = Rollover.find_by(id: params[:id])
-      if logged_in? && current_user == @rollover.user
+      if is_logged_in? && current_user == @rollover.user
       erb :'/rollovers/edit'
     else
       flash[:message] = "You cannot edit this rollover"
@@ -51,6 +51,7 @@ class RolloversController < ApplicationController
 
     patch "/rollovers/:id" do
       @rollover = Rollover.find_by(id: params[:id])
+      if is_logged_in? && current_user == @rollover.user
       if valid_params? && @rollover.update(params[:rollover])
         flash[:message] = "Successfully edited Rollover."
       redirect "/rollovers/#{@rollover.id}"
@@ -58,11 +59,19 @@ class RolloversController < ApplicationController
     redirect "rollovers/#{@rollover.id}/edit"
   end
 end
-
+end
     delete "/rollovers/:id" do
       @rollover = Rollover.find(params[:id])
       @rollover.destroy
       redirect "/rollovers"
     end
+
+    helpers do
+      def valid_params?
+        params[:rollover].none? do |k, v|
+          v == ""
+    end
+  end
+end
 
 end
