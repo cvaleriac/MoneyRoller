@@ -3,8 +3,6 @@ require 'rack-flash'
 class RolloversController < ApplicationController
   use Rack::Flash
 
-
-
     get "/rollovers/new" do
     erb :'/rollovers/new'
     end
@@ -52,17 +50,25 @@ class RolloversController < ApplicationController
     patch "/rollovers/:id" do
       @rollover = Rollover.find_by(id: params[:id])
       if is_logged_in? && current_user == @rollover.user
-      if valid_params? && @rollover.update(params[:rollover])
+      if valid_params?
+         @rollover.update(params[:rollover])
         flash[:message] = "Successfully edited Rollover."
       redirect "/rollovers/#{@rollover.id}"
   else
     redirect "rollovers/#{@rollover.id}/edit"
   end
+else
+  flash[:message] = "You do not have permission"
+  redirect "/rollovers"
+  end
 end
-end
-    delete "/rollovers/:id" do
-      @rollover = Rollover.find(params[:id])
-      @rollover.destroy
+    delete "/rollovers/:id/delete" do
+      @rollover = Rollover.find_by(id: params[:id])
+      if is_logged_in? && current_user == @rollover.user
+      @rollover.delete
+    else
+      flash[:message] = "You cannot delete this rollover."
+    end
       redirect "/rollovers"
     end
 
