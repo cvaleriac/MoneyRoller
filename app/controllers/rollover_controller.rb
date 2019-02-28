@@ -51,7 +51,8 @@ else
   redirect "/rollovers"
   end
 end
-    delete "/rollovers/:id/delete" do
+
+    delete "/rollovers/:id" do
       @rollover = Rollover.find_by(id: params[:id])
       if is_logged_in? && current_user == @rollover.user
       @rollover.delete
