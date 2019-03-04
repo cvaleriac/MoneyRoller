@@ -9,6 +9,7 @@
 <p>Amount: <%= @rollover.amount %></p>
 <p>Origin bank: <%= @rollover.origin_bank %></p>
 <p>Destination bank: <%= @rollover.destination_bank %></p>
+<p>Created by: <%= @rollover.user.username %></p>
 
 <% if @rollover.user == current_user %>
 

@@ -5,7 +5,13 @@
   </head>
 
   <body>
-
-    <%= yield %>
-  </body>
+  <div class="header">
+    <% if current_user %>
+      <h5>Signed in as: <%= current_user.username %></a></h5>
+    <% end %>
+  </div>
+  <div class="container">
+      <%= yield %>
+  </div>
+</body>
 </html>
