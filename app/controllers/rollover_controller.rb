@@ -1,25 +1,29 @@
 require 'rack-flash'
 
+
 class RolloversController < ApplicationController
   use Rack::Flash
 
-  get "/rollovers" do
-    @rollovers = Rollover.all
+    get "/rollovers" do
+    @rollovers = current_user.rollovers
     erb :'/rollovers/index'
-  end
+    end
 
     get "/rollovers/new" do
+      redirect_unless_logged_in
     erb :'/rollovers/new'
     end
 
     get "/rollovers/:id" do
+      redirect_unless_logged_in
     @rollover = Rollover.find_by(id: params[:id])
     erb :'/rollovers/show'
     end
 
     get "/rollovers/:id/edit" do
+      redirect_unless_logged_in
         @rollover = Rollover.find_by(id: params[:id])
-      if is_logged_in? && current_user == @rollover.user
+      if current_user == @rollover.user
       erb :'/rollovers/edit'
     else
       flash[:message] = "You cannot edit this rollover"

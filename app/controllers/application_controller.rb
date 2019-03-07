@@ -22,5 +22,12 @@ use Rack::Flash
     def is_logged_in?
       !!current_user
     end
+
+    def redirect_unless_logged_in
+      if  !is_logged_in?
+        redirect '/'
+      end
+
+    end
   end
   end
